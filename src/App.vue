@@ -1,3 +1,87 @@
+<template>
+  <Navbar />
+  <Hero />
+  <About />
+  <TechStack />
+  <!-- <Projects /> -->
+  <Achievements />
+  <JoinUs />
+  <Footer />
+</template>
+
+<script setup>
+import Navbar from './components/Navbar.vue';
+import Hero from './components/Hero.vue';
+import About from './components/About.vue';
+import TechStack from './components/TechStack.vue';
+// import Projects from './components/Projects.vue';
+import Achievements from './components/Achievements.vue';
+import JoinUs from './components/JoinUs.vue';
+import Footer from './components/Footer.vue';
+
+import { onMounted } from 'vue';
+import { debounce } from './utils/helpers';
+
+// Intersection Observer for Animations (retained for now, will be moved later)
+const initScrollAnimations = () => {
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in');
+      }
+    });
+  }, observerOptions);
+
+  // Observe elements for animation
+  const animateElements = document.querySelectorAll(
+    '.feature-card, .tech-category, .about-text, .about-image'
+  );
+  
+  animateElements.forEach(el => {
+    observer.observe(el);
+  });
+};
+
+// Loading Animation (retained for now, will be moved later)
+const initLoadingAnimations = () => {
+  const elements = document.querySelectorAll('.feature-card, .tech-category');
+  
+  const loadingObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('loaded');
+        }, index * 100); // Stagger the animations
+      }
+    });
+  }, {
+    threshold: 0.1
+  });
+  
+  elements.forEach(el => {
+    loadingObserver.observe(el);
+  });
+};
+
+onMounted(() => {
+  initScrollAnimations();
+  initLoadingAnimations();
+});
+</script>
+
+<style>
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap');
+
+/* Import Font Awesome */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+/* Global Styles from public/styles.css */
 /* ===== CSS Variables ===== */
 :root {
   /* Colors */
@@ -104,14 +188,10 @@ body {
 .logo-icon {
   width: 40px; /* 限制容器宽度 */
   height: 40px; /* 限制容器高度 */
-  /* background: var(--color-primary); /* 移除背景色 */
-  /* color: white; /* 移除文字颜色，因为不再显示文字 */
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* font-weight: 600; /* 移除文字样式 */
-  /* font-size: 0.875rem; /* 移除文字样式 */
   overflow: hidden; /* 确保图片超出容器时被裁剪 */
 }
 
@@ -120,7 +200,6 @@ body {
   max-height: 100%; /* 确保图片不会超出父容器的高度 */
   display: block; /* 移除图片底部可能存在的空白间隙 */
   object-fit: contain; /* 确保图片在容器内完整显示，可能会有留白 */
-  /* object-fit: cover; /* 如果希望图片填充整个容器并裁剪，可以使用这个 */
 }
 
 .nav-menu {
@@ -755,43 +834,35 @@ section {
 
 /* ===== Footer Section ===== */
 .footer {
-  /* 更改背景色为深炭灰色，或你选择的其他简约深色 */
-  background: #2F3640; /* 示例：深炭灰色 */
-  /* background: #1A2C3D; */ /* 示例：深海军蓝 */
-  /* background: #2A3B3A; */ /* 示例：柔和深绿 */
+  background: #2F3640;
   color: white;
   padding: var(--spacing-2xl) 0 var(--spacing-lg);
 }
 
 .footer-content {
   display: grid;
-  /* 默认情况下（桌面端），强制两列布局，左侧列更宽 */
-  grid-template-columns: 2fr 1fr; /* 左侧列是右侧列的两倍宽 */
+  grid-template-columns: 2fr 1fr;
   gap: var(--spacing-2xl);
   margin-bottom: var(--spacing-lg);
-  align-items: start; /* 将网格项内容顶部对齐 */
+  align-items: start;
 }
 
-/* 左侧列：典创工作室和友情链接的容器 */
 .footer-section.footer-left-group {
-  display: flex; /* 内部内容垂直堆叠 */
+  display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg); /* 典创工作室介绍和友情链接之间的间距 */
+  gap: var(--spacing-lg);
 }
 
-/* 友情链接子部分的样式 */
 .footer-links-group {
-  margin-top: var(--spacing-md); /* 增加友情链接部分与上方内容的间距 */
+  margin-top: var(--spacing-md);
 }
 
-/* 右侧列：技术领域和联系我们的容器 */
 .footer-section.footer-right-group {
-  display: flex; /* 内部内容垂直堆叠 */
+  display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg); /* 技术领域和联系我们之间的间距 */
+  gap: var(--spacing-lg);
 }
 
-/* 右侧列内部的子部分（技术领域和联系我们）的通用样式 */
 .footer-sub-section h4 {
   font-size: 1.125rem;
   font-weight: 600;
@@ -820,7 +891,6 @@ section {
   color: white;
 }
 
-/* 以下是你原有的 CSS 规则，保持不变，它们会应用于所有符合条件的元素 */
 .footer-section h4 {
   font-size: 1.125rem;
   font-weight: 600;
@@ -881,7 +951,7 @@ section {
 }
 
 /* ===== Responsive Design ===== */
-@media (max-width: 768px) { /* 你的现有移动端断点 */
+@media (max-width: 768px) {
   .container {
     padding: 0 var(--spacing-sm);
   }
@@ -972,21 +1042,19 @@ section {
   }
 
   .footer-content {
-    grid-template-columns: 1fr; /* 在小屏幕下，强制所有列堆叠 */
-    text-align: center; /* 内容居中 */
+    grid-template-columns: 1fr;
+    text-align: center;
     gap: var(--spacing-lg);
   }
-  /* 确保在小屏幕下，左右两组内部内容也垂直堆叠并居中 */
   .footer-section.footer-left-group,
   .footer-section.footer-right-group {
     flex-direction: column;
-    align-items: center; /* 内部内容居中 */
-    text-align: center; /* 文本居中 */
+    align-items: center;
+    text-align: center;
   }
   .footer-logo {
-    justify-content: center; /* 确保 logo 在移动端居中 */
+    justify-content: center;
   }
-  /* 调整子部分间距，使其在移动端堆叠时有适当间隔 */
   .footer-links-group, .footer-sub-section {
     margin-top: var(--spacing-lg);
   }
@@ -1039,3 +1107,4 @@ section {
     gap: var(--spacing-md);
   }
 }
+</style>
