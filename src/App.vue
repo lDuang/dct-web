@@ -3,7 +3,7 @@
   <Hero />
   <About />
   <TechStack />
-  <!-- <Projects /> -->
+  <HonorWall />
   <Achievements />
   <JoinUs />
   <Footer />
@@ -16,6 +16,7 @@ import About from './components/About.vue';
 import TechStack from './components/TechStack.vue';
 // import Projects from './components/Projects.vue';
 import Achievements from './components/Achievements.vue';
+import HonorWall from './components/HonorWall.vue';
 import JoinUs from './components/JoinUs.vue';
 import Footer from './components/Footer.vue';
 
