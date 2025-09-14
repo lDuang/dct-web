@@ -17,7 +17,7 @@
             <h4>友情链接</h4>
             <ul>
               <li><a href="https://qm.qq.com/cgi-bin/qm/qr?k=Y9XgCa9SyryugaAEqjm1i_CtI-cHenP6&jump_from=webapi&authKey=AiaPPy7DDEmKLfMDgVD4er1hVNq4h0HciXudWTlxhVp5SZLcusQN3yc7DPzeWRrS" target="_blank">加入我们!</a></li>
-              <li><a href="https://github.com" target="_blank">Web-repo:欢迎提PR参与贡献</a></li>
+              <li><a href="https://github.com/lDuang/dct-web" target="_blank">Web-repo:欢迎提PR参与贡献</a></li>
               <li><a href="https://blog.coderpath.me" target="_blank">WangXv-Blog</a></li>
               <li><a href="https://code.visualstudio.com/" target="_blank">Visual Studio Code</a></li>
               <li><a href="https://gitee.com/tangjiaxin188/rs-video-server" target="_blank">基于rocket的rust视频服务器</a></li>
