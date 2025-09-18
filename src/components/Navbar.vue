@@ -14,7 +14,7 @@
           <li><a href="#tech" @click="closeMobileMenu">技术领域</a></li>
           <li><a href="#honor-wall" @click="closeMobileMenu">荣誉墙</a></li>
           <!-- <li><a href="#projects" @click="closeMobileMenu">项目展示</a></li> -->
-          <li><a href="#achievements" @click="closeMobileMenu">成就荣誉</a></li>
+          <li><a href="#achievements" @click="closeMobileMenu">竞赛与成长</a></li>
           <li><a href="#join" @click="closeMobileMenu">加入我们</a></li>
         </ul>
         <button class="mobile-menu-btn" id="mobile-menu-btn" @click="toggleMobileMenu">

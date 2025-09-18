@@ -177,6 +177,10 @@ section {
     text-align: center;
   }
 
+  .achievement-icon {
+    margin: 0 auto var(--spacing-md) auto; /* 在小屏幕上居中图标并添加底部间距 */
+  }
+
   .section-header h2 {
     font-size: 2rem;
   }

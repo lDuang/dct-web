@@ -231,6 +231,17 @@ onUnmounted(() => {
     font-size: calc(1.1rem * var(--scale-factor));
 }
 
+.honor-wall-section .container {
+    width: 100%;
+    max-width: 1200px; /* 根据需要调整最大宽度 */
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .background-blur {
     position: absolute;
     top: 0;
@@ -243,7 +254,8 @@ onUnmounted(() => {
 }
 
 .image-grid-container {
-    width: calc(var(--num-columns) * (var(--img-width) + var(--grid-gap)) - var(--grid-gap) + 2 * var(--container-padding));
+    width: 100%; /* 占据父容器的全部宽度 */
+    max-width: calc(var(--num-columns) * (var(--img-width) + var(--grid-gap)) - var(--grid-gap) + 2 * var(--container-padding)); /* 限制最大宽度 */
     height: calc(var(--num-rows) * (var(--img-height) + var(--grid-gap)) - var(--grid-gap) + 2 * var(--container-padding));
 
     border: calc(1px * var(--scale-factor)) solid var(--color-border);
@@ -255,6 +267,8 @@ onUnmounted(() => {
     box-shadow: var(--shadow-lg);
     padding: var(--container-padding);
     margin-top: calc(var(--spacing-xl, 20px) * var(--scale-factor));
+    margin-left: auto; /* 确保在父容器中居中 */
+    margin-right: auto; /* 确保在父容器中居中 */
 }
 
 .image-grid {
@@ -363,9 +377,7 @@ onUnmounted(() => {
         --img-height: calc(108px * var(--scale-factor));
         padding: calc(var(--spacing-md, 16px) * var(--scale-factor)) 0;
     }
-    .image-grid-container {
-        width: calc(var(--num-columns) * (var(--img-width) + var(--grid-gap)) - var(--grid-gap) + 2 * var(--container-padding));
-        height: calc(var(--num-rows) * (var(--img-height) + var(--grid-gap)) - var(--grid-gap) + 2 * var(--container-padding));
-    }
+    /* 移除重复的宽度计算，因为已由上层样式处理 */
+    /* .image-grid-container 的宽度现在由其父容器和 max-width 控制 */
 }
 </style>

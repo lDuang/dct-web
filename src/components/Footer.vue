@@ -59,8 +59,8 @@
 <style scoped>
 /* Footer Section styles from public/styles.css */
 .footer {
-  background: #2F3640;
-  color: white;
+  background: #2F3640; /* 保持深灰色背景 */
+  color: rgba(255, 255, 255, 0.8); /* 浅灰色文本，在深色背景上清晰可见 */
   padding: var(--spacing-2xl) 0 var(--spacing-lg);
 }
 
@@ -92,7 +92,7 @@
   font-size: 1.125rem;
   font-weight: 600;
   margin-bottom: var(--spacing-md);
-  color: white;
+  color: var(--color-text-primary); /* 假设这是在深色背景下清晰可见的浅色文本变量 */
 }
 
 .footer-sub-section ul {
@@ -103,17 +103,17 @@
 
 .footer-sub-section ul li {
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.6); /* 稍暗的浅灰色 */
 }
 
 .footer-sub-section ul li a {
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--color-primary); /* 使用主题强调色 */
   text-decoration: none;
   transition: color var(--transition-fast);
 }
 
 .footer-sub-section ul li a:hover {
-  color: white;
+  color: var(--color-accent); /* 悬停时使用辅助强调色 */
 }
 
 .footer-section h4 {
