@@ -393,7 +393,7 @@ section {
 
 .section-header {
   text-align: center;
-  margin-bottom: var(--spacing-2xl);
+  margin-bottom: var(--spacing-xl); /* 减小标题与内容间距 */
 }
 
 .section-header h2 {

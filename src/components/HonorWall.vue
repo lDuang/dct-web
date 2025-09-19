@@ -76,7 +76,7 @@ const animateScroll = (timestamp) => {
     const deltaTime = timestamp - lastTimestamp;
     lastTimestamp = timestamp;
 
-    const pixelsPerSecond = 30;
+    const pixelsPerSecond = 20;
     const pixelsToMove = (pixelsPerSecond * deltaTime) / 1000;
 
     currentScrollX.value -= pixelsToMove;
@@ -193,10 +193,10 @@ onUnmounted(() => {
 });
 </script>
 
-<style>
-/* 定义一个缩放因子 */
+<style >
+
 :root {
-    --scale-factor: 1.5; /* 调整为 1.5 */
+    --scale-factor: 1.4375; /* 扩大15% */
 }
 
 .honor-wall-section {
@@ -217,13 +217,13 @@ onUnmounted(() => {
     padding: calc(var(--spacing-2xl, 40px) * var(--scale-factor)) 0;
     overflow: hidden;
     font-family: var(--font-family-sans);
-    background-color: var(--color-background);
+    background-color: var(--color-background-secondary); /* 统一背景 */
     width: 100%;
 }
 
 /* 标题字体和间距也需要调整 */
 .honor-wall-section .section-header h2 {
-    font-size: calc(2.5rem * var(--scale-factor));
+    font-size: 2.5rem; /* 调整为与其他模块一致 */
     margin-bottom: calc(var(--spacing-md, 16px) * var(--scale-factor));
 }
 
@@ -249,7 +249,7 @@ onUnmounted(() => {
     width: 100%;
     height: 100%;
     background-color: var(--color-background-secondary);
-    filter: blur(calc(5px * var(--scale-factor)));
+    /* filter: blur(calc(5px * var(--scale-factor))); */ /* 禁用模糊效果 */
     z-index: -1;
 }
 
@@ -259,14 +259,14 @@ onUnmounted(() => {
     height: calc(var(--num-rows) * (var(--img-height) + var(--grid-gap)) - var(--grid-gap) + 2 * var(--container-padding));
 
     border: calc(1px * var(--scale-factor)) solid var(--color-border);
-    border-radius: calc(12px * var(--scale-factor));
+    border-radius: calc(18px * var(--scale-factor));
     overflow: hidden;
     position: relative;
     background-color: var(--color-card);
     backdrop-filter: blur(calc(8px * var(--scale-factor)));
     box-shadow: var(--shadow-lg);
     padding: var(--container-padding);
-    margin-top: calc(var(--spacing-xl, 20px) * var(--scale-factor));
+    margin-top: var(--spacing-lg); /* 调整为更紧凑的间距 */
     margin-left: auto; /* 确保在父容器中居中 */
     margin-right: auto; /* 确保在父容器中居中 */
 }

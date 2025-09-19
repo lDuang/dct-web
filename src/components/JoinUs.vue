@@ -61,7 +61,7 @@
 <style scoped>
 /* Join Us Section styles from public/styles.css */
 .join-us {
-  background: var(--color-background);
+  background: var(--color-background-secondary); /* 统一背景 */
 }
 
 .join-content {

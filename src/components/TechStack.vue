@@ -13,9 +13,8 @@
           </div>
           <div class="tech-list">
             <span class="tech-tag">React</span>
-            <span class="tech-tag">Vue.js</span>
-            <span class="tech-tag">JavaScript</span>
-            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">Vue</span>
+            <span class="tech-tag">JS/TS</span>
             <span class="tech-tag">Next.js</span>
             <span class="tech-tag">Tailwind CSS</span>
           </div>
@@ -117,6 +116,10 @@ onMounted(() => {
 
 <style scoped>
 /* Tech Stack Section styles from public/styles.css */
+.tech-stack {
+  background: var(--color-background-secondary); /* 统一背景 */
+}
+
 .tech-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));

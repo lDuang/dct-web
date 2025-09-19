@@ -4,13 +4,12 @@
       <div class="hero-content">
         <div class="hero-badge">
           <i class="fas fa-code"></i>
-          <span>学生技术工作室</span>
+          <span>喀什大学-计算机科学与技术学院</span>
         </div>
         <h1 class="hero-title">{{ displayedHeroTitle }}</h1>
         <p class="hero-subtitle">代码与梦想，自由生长</p>
         <p class="hero-description">
-          汇聚热爱编程、勇于创新的学子，探索前后端开发、嵌入式系统、算法竞赛等技术领域。
-          在这里，技术与创意碰撞，梦想与实践并行。
+          典创工作室，汇聚热爱编程、勇于创新的学子，共同探索前端、后端开发、嵌入式系统、算法竞赛等前沿技术领域。在这里，我们致力于将技术与创意碰撞，让梦想与实践并行，培养未来技术领军人才。
         </p>
         <div class="hero-buttons">
           <a href="#tech" class="btn btn-primary">
@@ -68,7 +67,7 @@ const initParallaxEffect = () => {
 
 onMounted(() => {
   setTimeout(typeWriter, 1200); // Start typing effect after a delay
-  initParallaxEffect();
+  // initParallaxEffect(); // 暂时禁用视差滚动效果
 });
 </script>
 
@@ -78,7 +77,7 @@ onMounted(() => {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+  background: var(--color-background-secondary); /* 统一背景 */
   position: relative;
 }
 
