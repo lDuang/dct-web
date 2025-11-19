@@ -1,0 +1,108 @@
+/* Achievements Section styles from public/styles.css */
+.achievements {
+  background: var(--color-background-secondary);
+}
+
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.achievement-card {
+  background: var(--color-card);
+  padding: var(--spacing-lg);
+  border-radius: 16px;
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  transition: all var(--transition-normal);
+}
+
+.achievement-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgb(139 92 246 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.achievement-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.achievement-content h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.achievement-result {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  margin-bottom: var(--spacing-xs);
+}
+
+.achievement-desc {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* Section Header styles (copied from global) */
+.section-header {
+  text-align: center;
+  margin-bottom: var(--spacing-2xl);
+}
+
+.section-header h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.section-header p {
+  font-size: 1.125rem;
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Section padding (copied from global) */
+section {
+  padding: var(--spacing-2xl) 0;
+}
+
+/* Responsive Design for Achievements */
+@media (max-width: 768px) {
+  .achievements-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .achievement-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .achievement-icon {
+    margin: 0 auto var(--spacing-md) auto; /* 在小屏幕上居中图标并添加底部间距 */
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+  }
+
+  section {
+    padding: var(--spacing-xl) 0;
+  }
+}

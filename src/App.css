@@ -1,94 +1,13 @@
-<template>
-  <Navbar />
-  <Hero />
-  <About />
-  <TechStack />
-  <HonorWall />
-  <Achievements />
-  <JoinUs />
-  <Footer />
-</template>
-
-<script setup>
-import Navbar from './components/Navbar.vue';
-import Hero from './components/Hero.vue';
-import About from './components/About.vue';
-import TechStack from './components/TechStack.vue';
-// import Projects from './components/Projects.vue';
-import Achievements from './components/Achievements.vue';
-import HonorWall from './components/HonorWall.vue';
-import JoinUs from './components/JoinUs.vue';
-import Footer from './components/Footer.vue';
-
-import { onMounted } from 'vue';
-import { debounce } from './utils/helpers';
-
-// Intersection Observer for Animations (retained for now, will be moved later)
-const initScrollAnimations = () => {
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate-in');
-      }
-    });
-  }, observerOptions);
-
-  // Observe elements for animation
-  const animateElements = document.querySelectorAll(
-    '.feature-card, .tech-category, .about-text, .about-image'
-  );
-  
-  animateElements.forEach(el => {
-    observer.observe(el);
-  });
-};
-
-// Loading Animation (retained for now, will be moved later)
-const initLoadingAnimations = () => {
-  const elements = document.querySelectorAll('.feature-card, .tech-category');
-  
-  const loadingObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.classList.add('loaded');
-        }, index * 100); // Stagger the animations
-      }
-    });
-  }, {
-    threshold: 0.1
-  });
-  
-  elements.forEach(el => {
-    loadingObserver.observe(el);
-  });
-};
-
-onMounted(() => {
-  initScrollAnimations();
-  initLoadingAnimations();
-});
-</script>
-
-<style>
 /* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap');
-
-/* Import Font Awesome */
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
 
 /* Global Styles from public/styles.css */
 /* ===== CSS Variables ===== */
 :root {
   /* Colors */
-  --color-primary: #8B5CF6; /* 淡紫色 */
-  --color-secondary: #A78BFA; /* 浅紫色 */
-  --color-accent: #7C3AED; /* 深紫色 */
+  --color-primary: #8b5cf6; /* 淡紫色 */
+  --color-secondary: #a78bfa; /* 浅紫色 */
+  --color-accent: #7c3aed; /* 深紫色 */
   --color-text-primary: #1e293b;
   --color-text-secondary: #64748b;
   --color-text-muted: #94a3b8;
@@ -96,13 +15,15 @@ onMounted(() => {
   --color-background-secondary: #f8fafc;
   --color-border: #e2e8f0;
   --color-card: #ffffff;
-  
+
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(139 92 246 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(139 92 246 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  
+  --shadow-lg: 0 10px 15px -3px rgb(139 92 246 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(139 92 246 / 0.1),
+    0 8px 10px -6px rgb(0 0 0 / 0.1);
+
   /* Spacing */
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
@@ -110,11 +31,12 @@ onMounted(() => {
   --spacing-lg: 2rem;
   --spacing-xl: 3rem;
   --spacing-2xl: 4rem;
-  
+
   /* Typography */
-  --font-family-sans: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-sans: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont,
+    sans-serif;
   --font-family-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
-  
+
   /* Transitions */
   --transition-fast: 0.15s ease;
   --transition-normal: 0.3s ease;
@@ -144,6 +66,65 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--spacing-md);
+}
+
+/* ===== Animations ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.feature-card,
+.tech-category,
+.about-text,
+.about-image {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.feature-card.loaded,
+.tech-category.loaded,
+.about-text.loaded,
+.about-image.loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== Section Styles ===== */
+section {
+  padding: var(--spacing-2xl) 0;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl); /* 减小标题与内容间距 */
+}
+
+.section-header h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.section-header p {
+  font-size: 1.125rem;
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 /* ===== Navigation ===== */
@@ -269,9 +250,16 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: 
-    radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(124, 58, 237, 0.05) 0%, transparent 50%);
+  background: radial-gradient(
+      circle at 20% 80%,
+      rgba(139, 92, 246, 0.05) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(124, 58, 237, 0.05) 0%,
+      transparent 50%
+    );
   pointer-events: none;
 }
 
@@ -372,42 +360,6 @@ body {
   background: var(--color-background-secondary);
   transform: translateY(-1px);
   box-shadow: var(--shadow-md);
-}
-
-/* ===== Animations ===== */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ===== Section Styles ===== */
-section {
-  padding: var(--spacing-2xl) 0;
-}
-
-.section-header {
-  text-align: center;
-  margin-bottom: var(--spacing-xl); /* 减小标题与内容间距 */
-}
-
-.section-header h2 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--color-text-primary);
-  margin-bottom: var(--spacing-sm);
-}
-
-.section-header p {
-  font-size: 1.125rem;
-  color: var(--color-text-secondary);
-  max-width: 600px;
-  margin: 0 auto;
 }
 
 /* ===== About Section ===== */
@@ -513,7 +465,8 @@ section {
 
 .tech-category:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 15px -3px rgb(139 92 246 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  box-shadow: 0 10px 15px -3px rgb(139 92 246 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
 .tech-header {
@@ -558,18 +511,18 @@ section {
   box-shadow: var(--shadow-sm);
 }
 
-/* ===== Projects Section ===== */
-.projects {
+/* ===== Honor Wall Section ===== */
+.honor-wall {
   background: var(--color-background);
 }
 
-.projects-grid {
+.honor-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: var(--spacing-lg);
 }
 
-.project-card {
+.honor-card {
   background: var(--color-card);
   border-radius: 16px;
   overflow: hidden;
@@ -578,80 +531,59 @@ section {
   transition: all var(--transition-normal);
 }
 
-.project-card:hover {
+.honor-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 25px -5px rgb(139 92 246 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  box-shadow: 0 20px 25px -5px rgb(139 92 246 / 0.1),
+    0 8px 10px -6px rgb(0 0 0 / 0.1);
 }
 
-.project-image {
+.honor-image {
   position: relative;
   overflow: hidden;
   height: 200px;
 }
 
-.project-image img {
+.honor-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform var(--transition-normal);
 }
 
-.project-card:hover .project-image img {
+.honor-card:hover .honor-image img {
   transform: scale(1.05);
 }
 
-.project-overlay {
-  position: absolute;
-  top: var(--spacing-sm);
-  right: var(--spacing-sm);
-}
-
-.project-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-xs);
-}
-
-.project-tags .tag {
-  background: rgba(255, 255, 255, 0.9);
-  color: var(--color-text-primary);
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  font-weight: 500;
-  backdrop-filter: blur(8px);
-}
-
-.project-content {
+.honor-content {
   padding: var(--spacing-lg);
 }
 
-.project-content h3 {
+.honor-content h3 {
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--color-text-primary);
   margin-bottom: var(--spacing-sm);
 }
 
-.project-content p {
+.honor-content p {
   font-size: 0.9rem;
   color: var(--color-text-secondary);
   line-height: 1.6;
   margin-bottom: var(--spacing-md);
 }
 
-.project-footer {
+.honor-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.project-date {
+.honor-date {
   font-size: 0.875rem;
   color: var(--color-text-muted);
 }
 
-.project-link {
+.honor-link {
   width: 36px;
   height: 36px;
   background: var(--color-background-secondary);
@@ -664,7 +596,7 @@ section {
   transition: all var(--transition-fast);
 }
 
-.project-link:hover {
+.honor-link:hover {
   background: var(--color-primary);
   color: white;
   transform: scale(1.1);
@@ -694,13 +626,18 @@ section {
 
 .achievement-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgb(139 92 246 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  box-shadow: 0 10px 15px -3px rgb(139 92 246 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
 .achievement-icon {
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-accent)
+  );
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -790,7 +727,11 @@ section {
 }
 
 .join-cta {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-accent)
+  );
   padding: var(--spacing-2xl);
   border-radius: 20px;
   color: white;
@@ -835,7 +776,7 @@ section {
 
 /* ===== Footer Section ===== */
 .footer {
-  background: #2F3640;
+  background: #2f3640;
   color: white;
   padding: var(--spacing-2xl) 0 var(--spacing-lg);
 }
@@ -1029,7 +970,7 @@ section {
     grid-template-columns: 1fr;
   }
 
-  .projects-grid {
+  .honor-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1056,7 +997,8 @@ section {
   .footer-logo {
     justify-content: center;
   }
-  .footer-links-group, .footer-sub-section {
+  .footer-links-group,
+  .footer-sub-section {
     margin-top: var(--spacing-lg);
   }
 
@@ -1087,7 +1029,7 @@ section {
     padding: var(--spacing-sm);
   }
 
-  .project-card {
+  .honor-card {
     margin: 0 var(--spacing-xs);
   }
 
@@ -1108,4 +1050,3 @@ section {
     gap: var(--spacing-md);
   }
 }
-</style>
