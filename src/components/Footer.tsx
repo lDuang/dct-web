@@ -1,56 +1,151 @@
-import './Footer.css';
+/* components/Footer.tsx */
+import { useEffect, useRef, useState } from 'react'
+import { Mail, Github, Code } from 'lucide-react'
+
+const quickLinks = [
+  { label: '首页', href: '#home' },
+  { label: '关于我们', href: '#about' },
+  { label: '技术领域', href: '#tech' },
+  { label: '荣誉墙', href: '#honor-wall' },
+  { label: '竞赛与成长', href: '#achievements' },
+  { label: '加入我们', href: '#join' },
+]
+
+const techAreas = ['前端开发', '后端开发', '嵌入式系统', '算法竞赛']
+
+const friendLinks = [
+  { label: 'GitHub', href: 'https://github.com/dct-web' },
+  { label: 'Blog', href: 'https://blog.coderpath.me' },
+  { label: 'VS Code', href: 'https://code.visualstudio.com/' },
+]
 
 const Footer = () => {
-  return (
-    <footer className="footer">
-      <div className="container">
-        <div className="footer-content">
-          <div className="footer-section footer-left-group">
-            <div className="footer-logo">
-              <div className="logo-icon">
-                <img src="https://cloud.duapp.dev/f/OYu2/Ys3tn9wT_dct-logo.png" alt="dct-logo" />
-              </div>
-              <span>典创工作室</span>
-            </div>
-            <p>代码与梦想，自由生长。汇聚热爱编程的学子，在技术的世界里探索无限可能。</p>
+  const footerRef = useRef<HTMLElement>(null)
 
-            <div className="footer-links-group">
-              <h4>友情链接</h4>
-              <ul>
-                <li><a href="https://qm.qq.com/cgi-bin/qm/qr?k=Y9XgCa9SyryugaAEqjm1i_CtI-cHenP6&jump_from=webapi&authKey=AiaPPy7DDEmKLfMDgVD4er1hVNq4h0HciXudWTlxhVp5SZLcusQN3yc7DPzeWRrS" target="_blank" rel="noopener noreferrer">加入我们!</a></li>
-                <li><a href="https://github.com/lDuang/dct-web" target="_blank" rel="noopener noreferrer">Web-repo:欢迎提PR参与贡献</a></li>
-                <li><a href="https://blog.coderpath.me" target="_blank" rel="noopener noreferrer">WangXv-Blog</a></li>
-                <li><a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer">Visual Studio Code</a></li>
-                <li><a href="https://gitee.com/tangjiaxin188/rs-video-server" target="_blank" rel="noopener noreferrer">基于rocket的rust视频服务器</a></li>
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+          observer.unobserve(entry.target)
+        }
+      },
+      { threshold: 0.1 },
+    )
+
+    if (footerRef.current) {
+      observer.observe(footerRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <footer
+      ref={footerRef}
+      className="py-16 px-6 border-t border-[var(--glass-border)] bg-[var(--color-bg-card)]"
+    >
+      <div className="max-w-6xl mx-auto space-y-12">
+        <div className="grid md:grid-cols-3 gap-12">
+          {/* 品牌区 */}
+          <div className="space-y-6">
+            <a href="#" className="flex items-center gap-3">
+              <img
+                src="https://cloud.duapp.dev/f/OYu2/Ys3tn9wT_dct-logo.png"
+                alt="DCT"
+                className="w-10 h-10"
+              />
+              <span className="font-semibold">典创工作室</span>
+            </a>
+            <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+              代码与梦想，自由生长。汇聚热爱编程的学子，在技术的世界里探索无限可能。
+            </p>
+            <div>
+              <h4 className="font-semibold mb-4">友情链接</h4>
+              <ul className="space-y-2">
+                {friendLinks.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
 
-          <div className="footer-section footer-right-group">
-            <div className="footer-sub-section">
-              <h4>技术领域</h4>
-              <ul>
-                <li>前端开发</li>
-                <li>后端开发</li>
-                <li>嵌入式系统</li>
-                <li>算法竞赛</li>
+          {/* 快速导航 */}
+          <div>
+            <h4 className="font-semibold mb-4">快速导航</h4>
+            <ul className="space-y-3">
+              {quickLinks.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* 技术领域 + 联系 */}
+          <div className="space-y-6">
+            <div>
+              <h4 className="font-semibold mb-4">技术领域</h4>
+              <ul className="space-y-3">
+                {techAreas.map((area) => (
+                  <li key={area}>
+                    <span className="flex items-center gap-2 text-sm text-[var(--color-text-secondary)]">
+                      <Code size={14} />
+                      {area}
+                    </span>
+                  </li>
+                ))}
               </ul>
             </div>
-            <div className="footer-sub-section">
-              <h4>联系我们</h4>
-              <ul>
-                <li>QQ群：715940323</li>
-                <li>邮箱：outside@duapp.dev</li>
-              </ul>
+            <div>
+              <h4 className="font-semibold mb-4">联系我们</h4>
+              <div className="space-y-3 text-sm text-[var(--color-text-secondary)]">
+                <p>QQ：715940323</p>
+                <p>outside@duapp.dev</p>
+              </div>
             </div>
           </div>
         </div>
-        <div className="footer-bottom">
-          <p>&copy; 2025 典创工作室. 保留所有权利.</p>
+
+        {/* 底部版权 */}
+        <div className="pt-8 border-t border-[var(--glass-border)] flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="text-sm text-[var(--color-text-secondary)]">
+            © 2025 典创工作室. 保留所有权利.
+          </p>
+          <div className="flex items-center gap-4">
+            <a
+              href="https://github.com/dct-web"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition"
+            >
+              <Github size={20} />
+            </a>
+            <a
+              href="mailto:outside@duapp.dev"
+              className="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition"
+            >
+              <Mail size={20} />
+            </a>
+          </div>
         </div>
       </div>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer
