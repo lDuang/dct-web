@@ -1,6 +1,5 @@
 /* components/HonorWall.tsx */
 import { useEffect, useRef, useState } from 'react'
-import { Award } from 'lucide-react'
 
 const imageLinks = [
   'https://cloud.duapp.dev/f/5Lfq/IMG_1365.jpeg',
