@@ -1,0 +1,65 @@
+/* index.css */
+@import "tailwindcss";
+
+@theme {
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* 浅色模式（默认 - 无 .dark 类） */
+:root {
+  --glass-border: rgba(0, 0, 0, 0.08);
+
+  --color-bg-dark: #f5f5f0;
+  --color-bg-surface: #ffffff;
+  --color-bg-card: #f0f0f0;
+  --color-bg-mid: #ebebeb;
+
+  --color-text-primary: #0a0a0a;
+  --color-text-secondary: #6b6b6b;
+
+  --color-accent: #002fa7;
+  --color-accent-strong: #0047cc;
+  --color-accent-soft: rgba(0, 47, 167, 0.15);
+}
+
+/* 深色模式 - 有 .dark 类时 */
+:root.dark {
+  --glass-border: rgba(255, 255, 255, 0.06);
+
+  --color-bg-dark: #0a0a0a;
+  --color-bg-surface: #121212;
+  --color-bg-card: #171717;
+  --color-bg-mid: #141414;
+
+  --color-text-primary: #f5f5f0;
+  --color-text-secondary: #a3a3a3;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background:
+    radial-gradient(800px 400px at 50% 15%, rgba(0, 47, 167, 0.18), transparent 65%),
+    linear-gradient(180deg, var(--color-bg-dark) 0%, var(--color-bg-mid) 40%, var(--color-bg-dark) 100%);
+  color: var(--color-text-primary);
+}
+
+.glass {
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-text-primary), var(--color-text-secondary));
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
-import { debounce } from '../utils/helpers';
+import { useState, useEffect } from 'react'
+import { Menu, X, Moon, Sun } from 'lucide-react'
 
 const navItems = [
   { href: '#home', label: '首页' },
@@ -8,108 +8,132 @@ const navItems = [
   { href: '#honor-wall', label: '荣誉墙' },
   { href: '#achievements', label: '竞赛与成长' },
   { href: '#join', label: '加入我们' },
-];
+]
 
 const Navbar = () => {
-  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const navbarRef = useRef<HTMLElement>(null);
-  const mobileMenuBtnRef = useRef<HTMLButtonElement>(null);
-  const navMenuRef = useRef<HTMLUListElement>(null);
-
-  const toggleMobileMenu = () => setMobileMenuOpen(!isMobileMenuOpen);
-  const closeMobileMenu = () => setMobileMenuOpen(false);
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [isDark, setIsDark] = useState(false)
 
   useEffect(() => {
-    const handleNavbarScroll = () => setIsScrolled(window.scrollY > 50);
+    // 检测系统主题并初始化
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const savedTheme = localStorage.getItem('theme')
+    const shouldBeDark = savedTheme ? savedTheme === 'dark' : prefersDark
 
-    const initSmoothScrolling = () => {
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', (e) => {
-          e.preventDefault();
-          const href = anchor.getAttribute('href');
-          if (href) {
-            const target = document.querySelector(href);
-            if (target instanceof HTMLElement) {
-              window.scrollTo({
-                top: target.offsetTop - 80,
-                behavior: 'smooth'
-              });
-              if (isMobileMenuOpen) closeMobileMenu();
-            }
+    setIsDark(shouldBeDark)
+    document.documentElement.classList.toggle('dark', shouldBeDark)
+
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', (e) => {
+        e.preventDefault()
+        const href = anchor.getAttribute('href')
+        if (href) {
+          const target = document.querySelector(href)
+          if (target instanceof HTMLElement) {
+            window.scrollTo({
+              top: target.offsetTop - 80,
+              behavior: 'smooth',
+            })
+            setMobileMenuOpen(false)
           }
-        });
-      });
-    };
+        }
+      })
+    })
 
-    const handleClickOutside = (e: MouseEvent) => {
-      if (
-        isMobileMenuOpen &&
-        navbarRef.current && !navbarRef.current.contains(e.target as Node) &&
-        mobileMenuBtnRef.current && !mobileMenuBtnRef.current.contains(e.target as Node) &&
-        navMenuRef.current && !navMenuRef.current.contains(e.target as Node)
-      ) {
-        closeMobileMenu();
-      }
-    };
-
+    // ESC 关闭菜单
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isMobileMenuOpen) closeMobileMenu();
-    };
+      if (e.key === 'Escape') setMobileMenuOpen(false)
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [])
 
-    const debouncedScrollHandler = debounce(handleNavbarScroll, 10);
-    window.addEventListener('scroll', debouncedScrollHandler);
-    initSmoothScrolling();
-    document.addEventListener('click', handleClickOutside);
-    document.addEventListener('keydown', handleKeyDown);
-    handleNavbarScroll();
+  const toggleMobileMenu = () => setMobileMenuOpen(!isMobileMenuOpen)
 
-    return () => {
-      window.removeEventListener('scroll', debouncedScrollHandler);
-      document.removeEventListener('click', handleClickOutside);
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isMobileMenuOpen]);
+  const toggleTheme = () => {
+    const newIsDark = !isDark
+    setIsDark(newIsDark)
+    document.documentElement.classList.toggle('dark', newIsDark)
+    localStorage.setItem('theme', newIsDark ? 'dark' : 'light')
+  }
 
   return (
-    <nav ref={navbarRef}>
-      <div>
-        <div>
-          <a href="#">
-            <div>
-              <img src="https://cloud.duapp.dev/f/OYu2/Ys3tn9wT_dct-logo.png" alt="DCT Logo" />
-            </div>
-            <span>典创工作室</span>
+    <>
+      {/* 桌面导航 */}
+      <nav className="fixed top-0 left-0 right-0 z-50 glass">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          {/* Logo - 只保留图标 */}
+          <a href="#" className="flex items-center">
+            <img
+              src="https://cloud.duapp.dev/f/OYu2/Ys3tn9wT_dct-logo.png"
+              alt="DCT"
+              className="w-10 h-10"
+            />
           </a>
-          <ul>
+
+          {/* 导航链接 - 居中 */}
+          <ul className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
               <li key={item.href}>
-                <a href={item.href}>{item.label}</a>
+                <a
+                  href={item.href}
+                  className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition"
+                >
+                  {item.label}
+                </a>
               </li>
             ))}
           </ul>
-          <button
-            ref={mobileMenuBtnRef}
-            onClick={toggleMobileMenu}
-            aria-label={isMobileMenuOpen ? '关闭菜单' : '打开菜单'}
-          >
-            <i className={`fas ${isMobileMenuOpen ? 'fa-times' : 'fa-bars'}`} />
-          </button>
-        </div>
-      </div>
-      <div>
-        <ul ref={navMenuRef}>
-          {navItems.map((item) => (
-            <li key={item.href}>
-              <a href={item.href} onClick={closeMobileMenu}>
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </nav>
-  );
-};
 
-export default Navbar;
+          {/* 右侧：主题切换 + 移动端菜单按钮 */}
+          <div className="flex items-center gap-4">
+            {/* 主题切换 */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition"
+              aria-label={isDark ? '切换到浅色模式' : '切换到深色模式'}
+            >
+              {isDark ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
+
+            {/* 移动端菜单按钮 */}
+            <button
+              onClick={toggleMobileMenu}
+              className="md:hidden p-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition"
+              aria-label={isMobileMenuOpen ? '关闭菜单' : '打开菜单'}
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* 移动端菜单遮罩 */}
+      {isMobileMenuOpen && (
+        <>
+          <div
+            className="fixed inset-0 bg-black/50 z-40"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+          <div className="fixed top-0 right-0 bottom-0 w-64 bg-[var(--color-bg-card)] z-50 p-6 transform transition-transform">
+            <ul className="flex flex-col gap-6 mt-12">
+              {navItems.map((item) => (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    className="text-lg text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </>
+      )}
+    </>
+  )
+}
+
+export default Navbar
