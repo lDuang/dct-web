@@ -1,31 +1,27 @@
 import { useState, useEffect, useRef } from 'react';
 import { debounce } from '../utils/helpers';
-import './Navbar.css';
+
+const navItems = [
+  { href: '#home', label: '首页' },
+  { href: '#about', label: '关于我们' },
+  { href: '#tech', label: '技术领域' },
+  { href: '#honor-wall', label: '荣誉墙' },
+  { href: '#achievements', label: '竞赛与成长' },
+  { href: '#join', label: '加入我们' },
+];
 
 const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const navbarRef = useRef<HTMLElement>(null);
   const mobileMenuBtnRef = useRef<HTMLButtonElement>(null);
   const navMenuRef = useRef<HTMLUListElement>(null);
 
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!isMobileMenuOpen);
-  };
-
-  const closeMobileMenu = () => {
-    setMobileMenuOpen(false);
-  };
+  const toggleMobileMenu = () => setMobileMenuOpen(!isMobileMenuOpen);
+  const closeMobileMenu = () => setMobileMenuOpen(false);
 
   useEffect(() => {
-    const handleNavbarScroll = () => {
-      if (navbarRef.current) {
-        if (window.scrollY > 50) {
-          navbarRef.current.classList.add('scrolled');
-        } else {
-          navbarRef.current.classList.remove('scrolled');
-        }
-      }
-    };
+    const handleNavbarScroll = () => setIsScrolled(window.scrollY > 50);
 
     const initSmoothScrolling = () => {
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -35,14 +31,11 @@ const Navbar = () => {
           if (href) {
             const target = document.querySelector(href);
             if (target instanceof HTMLElement) {
-              const offsetTop = target.offsetTop - 80; // Account for fixed navbar
               window.scrollTo({
-                top: offsetTop,
+                top: target.offsetTop - 80,
                 behavior: 'smooth'
               });
-              if (isMobileMenuOpen) {
-                closeMobileMenu();
-              }
+              if (isMobileMenuOpen) closeMobileMenu();
             }
           }
         });
@@ -50,20 +43,18 @@ const Navbar = () => {
     };
 
     const handleClickOutside = (e: MouseEvent) => {
-        if (
-            isMobileMenuOpen &&
-            navbarRef.current && !navbarRef.current.contains(e.target as Node) &&
-            mobileMenuBtnRef.current && !mobileMenuBtnRef.current.contains(e.target as Node) &&
-            navMenuRef.current && !navMenuRef.current.contains(e.target as Node)
-        ) {
-            closeMobileMenu();
-        }
+      if (
+        isMobileMenuOpen &&
+        navbarRef.current && !navbarRef.current.contains(e.target as Node) &&
+        mobileMenuBtnRef.current && !mobileMenuBtnRef.current.contains(e.target as Node) &&
+        navMenuRef.current && !navMenuRef.current.contains(e.target as Node)
+      ) {
+        closeMobileMenu();
+      }
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isMobileMenuOpen) {
-        closeMobileMenu();
-      }
+      if (e.key === 'Escape' && isMobileMenuOpen) closeMobileMenu();
     };
 
     const debouncedScrollHandler = debounce(handleNavbarScroll, 10);
@@ -71,38 +62,51 @@ const Navbar = () => {
     initSmoothScrolling();
     document.addEventListener('click', handleClickOutside);
     document.addEventListener('keydown', handleKeyDown);
-    handleNavbarScroll(); // Set initial navbar state
+    handleNavbarScroll();
 
     return () => {
       window.removeEventListener('scroll', debouncedScrollHandler);
       document.removeEventListener('click', handleClickOutside);
       document.removeEventListener('keydown', handleKeyDown);
-      // Note: Smooth scrolling listeners are not removed, which is generally fine
     };
-  }, [isMobileMenuOpen]); // Re-run effect if isMobileMenuOpen changes for handleClickOutside
+  }, [isMobileMenuOpen]);
 
   return (
-    <nav className="navbar" id="navbar" ref={navbarRef}>
-      <div className="container">
-        <div className="nav-content">
-          <a href="#" className="logo">
-            <div className="logo-icon">
-              <img src="https://cloud.duapp.dev/f/OYu2/Ys3tn9wT_dct-logo.png" alt="dct-logo" />
+    <nav ref={navbarRef}>
+      <div>
+        <div>
+          <a href="#">
+            <div>
+              <img src="https://cloud.duapp.dev/f/OYu2/Ys3tn9wT_dct-logo.png" alt="DCT Logo" />
             </div>
             <span>典创工作室</span>
           </a>
-          <ul className={`nav-menu ${isMobileMenuOpen ? 'active' : ''}`} id="nav-menu" ref={navMenuRef}>
-            <li><a href="#home" onClick={closeMobileMenu}>首页</a></li>
-            <li><a href="#about" onClick={closeMobileMenu}>关于我们</a></li>
-            <li><a href="#tech" onClick={closeMobileMenu}>技术领域</a></li>
-            <li><a href="#honor-wall" onClick={closeMobileMenu}>荣誉墙</a></li>
-            <li><a href="#achievements" onClick={closeMobileMenu}>竞赛与成长</a></li>
-            <li><a href="#join" onClick={closeMobileMenu}>加入我们</a></li>
+          <ul>
+            {navItems.map((item) => (
+              <li key={item.href}>
+                <a href={item.href}>{item.label}</a>
+              </li>
+            ))}
           </ul>
-          <button className="mobile-menu-btn" id="mobile-menu-btn" onClick={toggleMobileMenu} ref={mobileMenuBtnRef}>
-            <i className={`fas ${isMobileMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+          <button
+            ref={mobileMenuBtnRef}
+            onClick={toggleMobileMenu}
+            aria-label={isMobileMenuOpen ? '关闭菜单' : '打开菜单'}
+          >
+            <i className={`fas ${isMobileMenuOpen ? 'fa-times' : 'fa-bars'}`} />
           </button>
         </div>
+      </div>
+      <div>
+        <ul ref={navMenuRef}>
+          {navItems.map((item) => (
+            <li key={item.href}>
+              <a href={item.href} onClick={closeMobileMenu}>
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
     </nav>
   );
