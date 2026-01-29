@@ -73,11 +73,11 @@ const Achievements = () => {
       <div className="max-w-6xl mx-auto space-y-12">
         {/* 标题区 */}
         <div className="text-center space-y-4">
-          <span className="text-xs font-semibold tracking-widest text-[var(--color-accent)] uppercase">
+          <span className="text-xs font-semibold tracking-widest text-(--color-accent) uppercase">
             Achievements
           </span>
           <h2 className="text-4xl font-semibold">竞赛与成长</h2>
-          <p className="text-[var(--color-text-secondary)]">
+          <p className="text-(--color-text-secondary)">
             在实践与积累中前行，记录每一步成长印记
           </p>
         </div>
@@ -87,16 +87,16 @@ const Achievements = () => {
           {achievements.map((item) => (
             <div
               key={item.title}
-              className="bg-[var(--color-bg-card)] rounded-xl p-6
-                space-y-4 border border-[var(--glass-border)]
-                hover:border-[var(--color-accent)] transition-all duration-300"
+              className="bg-(--color-bg-card) rounded-xl p-6
+                space-y-4 border border-(--glass-border)
+                hover:border-(--color-accent) transition-all duration-300"
             >
-              <div className="w-12 h-12 rounded-lg bg-[var(--color-accent-soft)] flex items-center justify-center">
-                <item.icon className="text-[var(--color-accent)]" size={24} />
+              <div className="w-12 h-12 rounded-lg bg-(--color-accent-soft) flex items-center justify-center">
+                <item.icon className="text-(--color-accent)" size={24} />
               </div>
               <h3 className="font-semibold text-lg leading-tight">{item.title}</h3>
-              <p className="text-sm text-[var(--color-accent)] font-medium">{item.result}</p>
-              <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+              <p className="text-sm text-(--color-accent) font-medium">{item.result}</p>
+              <p className="text-sm text-(--color-text-secondary) leading-relaxed">
                 {item.desc}
               </p>
             </div>

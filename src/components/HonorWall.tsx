@@ -137,11 +137,11 @@ const HonorWall = () => {
     <section id="honor-wall" className="py-24 px-6">
       <div className="max-w-6xl mx-auto space-y-12 mb-12">
         <div className="text-center space-y-4">
-          <span className="text-xs font-semibold tracking-widest text-[var(--color-accent)] uppercase">
+          <span className="text-xs font-semibold tracking-widest text-(--color-accent) uppercase">
             Honor Wall
           </span>
           <h2 className="text-4xl font-semibold">荣誉墙</h2>
-          <p className="text-[var(--color-text-secondary)]">我们团队的成就与荣誉</p>
+          <p className="text-(--color-text-secondary)">我们团队的成就与荣誉</p>
         </div>
       </div>
 

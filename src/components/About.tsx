@@ -52,18 +52,18 @@ const About = () => {
       <div className="max-w-6xl mx-auto space-y-16">
         {/* 标题区 */}
         <div className="text-center space-y-4">
-          <span className="text-xs font-semibold tracking-widest text-[var(--color-accent)] uppercase">
+          <span className="text-xs font-semibold tracking-widest text-(--color-accent) uppercase">
             About Us
           </span>
           <h2 className="text-4xl font-semibold">关于我们</h2>
-          <p className="text-[var(--color-text-secondary)]">专业的技术团队，用心培养每一位成员</p>
+          <p className="text-(--color-text-secondary)">专业的技术团队，用心培养每一位成员</p>
         </div>
 
         {/* 简介区 */}
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <h3 className="text-2xl font-semibold">工作室简介</h3>
-            <div className="space-y-4 text-[var(--color-text-secondary)] leading-relaxed">
+            <div className="space-y-4 text-(--color-text-secondary) leading-relaxed">
               <p>
                 典创工作室隶属于喀什大学计算机科学与技术学院，是一个专注于技术创新的学生工作室。
                 我们相信技术的力量能够改变世界，每一行代码都承载着创造者的梦想。
@@ -75,8 +75,8 @@ const About = () => {
             </div>
           </div>
           <div className="relative">
-            <div className="absolute inset-0 bg-[var(--color-accent-soft)] rounded-2xl blur-2xl opacity-50" />
-            <div className="relative rounded-2xl overflow-hidden border border-[var(--glass-border)]">
+            <div className="absolute inset-0 bg-(--color-accent-soft) rounded-2xl blur-2xl opacity-50" />
+            <div className="relative rounded-2xl overflow-hidden border border-(--glass-border)">
               <img
                 src="https://cloud.duapp.dev/f/qaHY/GFGYhuQb_EXDobluD.png"
                 alt="Team"
@@ -91,13 +91,13 @@ const About = () => {
           {features.map((feature) => (
             <div
               key={feature.title}
-              className="bg-[var(--color-bg-card)] rounded-xl p-6 space-y-4 border border-[var(--glass-border)]"
+              className="bg-(--color-bg-card) rounded-xl p-6 space-y-4 border border-(--glass-border)"
             >
-              <div className="w-12 h-12 rounded-lg bg-[var(--color-accent-soft)] flex items-center justify-center">
-                <feature.icon className="text-[var(--color-accent)]" size={24} />
+              <div className="w-12 h-12 rounded-lg bg-(--color-accent-soft) flex items-center justify-center">
+                <feature.icon className="text-(--color-accent)" size={24} />
               </div>
               <h4 className="text-lg font-semibold">{feature.title}</h4>
-              <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+              <p className="text-sm text-(--color-text-secondary) leading-relaxed">
                 {feature.desc}
               </p>
             </div>

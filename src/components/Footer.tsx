@@ -44,7 +44,7 @@ const Footer = () => {
   return (
     <footer
       ref={footerRef}
-      className={`py-16 px-6 border-t border-[var(--glass-border)] bg-[var(--color-bg-card)] transition duration-700 ${
+      className={`py-16 px-6 border-t border-(--glass-border) bg-(--color-bg-card) transition duration-700 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
       }`}
     >
@@ -60,7 +60,7 @@ const Footer = () => {
               />
               <span className="font-semibold">典创工作室</span>
             </a>
-            <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+            <p className="text-sm text-(--color-text-secondary) leading-relaxed">
               代码与梦想，自由生长。汇聚热爱编程的学子，在技术的世界里探索无限可能。
             </p>
             <div>
@@ -72,7 +72,7 @@ const Footer = () => {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition"
+                      className="text-sm text-(--color-text-secondary) hover:text-(--color-accent) transition"
                     >
                       {link.label}
                     </a>
@@ -90,7 +90,7 @@ const Footer = () => {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition"
+                    className="text-sm text-(--color-text-secondary) hover:text-(--color-accent) transition"
                   >
                     {link.label}
                   </a>
@@ -106,7 +106,7 @@ const Footer = () => {
               <ul className="space-y-3">
                 {techAreas.map((area) => (
                   <li key={area}>
-                    <span className="flex items-center gap-2 text-sm text-[var(--color-text-secondary)]">
+                    <span className="flex items-center gap-2 text-sm text-(--color-text-secondary)">
                       <Code size={14} />
                       {area}
                     </span>
@@ -116,7 +116,7 @@ const Footer = () => {
             </div>
             <div>
               <h4 className="font-semibold mb-4">联系我们</h4>
-              <div className="space-y-3 text-sm text-[var(--color-text-secondary)]">
+              <div className="space-y-3 text-sm text-(--color-text-secondary)">
                 <p>QQ：715940323</p>
                 <p>outside@duapp.dev</p>
               </div>
@@ -125,8 +125,8 @@ const Footer = () => {
         </div>
 
         {/* 底部版权 */}
-        <div className="pt-8 border-t border-[var(--glass-border)] flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-[var(--color-text-secondary)]">
+        <div className="pt-8 border-t border-(--glass-border) flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="text-sm text-(--color-text-secondary)">
             © 2025 典创工作室. 保留所有权利.
           </p>
           <div className="flex items-center gap-4">
@@ -134,13 +134,13 @@ const Footer = () => {
               href="https://github.com/dct-web"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition"
+              className="text-(--color-text-secondary) hover:text-(--color-accent) transition"
             >
               <Github size={20} />
             </a>
             <a
               href="mailto:outside@duapp.dev"
-              className="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition"
+              className="text-(--color-text-secondary) hover:text-(--color-accent) transition"
             >
               <Mail size={20} />
             </a>

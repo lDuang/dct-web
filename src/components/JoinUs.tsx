@@ -49,11 +49,11 @@ const JoinUs = () => {
       <div className="max-w-6xl mx-auto space-y-12">
         {/* 标题区 */}
         <div className="text-center space-y-4">
-          <span className="text-xs font-semibold tracking-widest text-[var(--color-accent)] uppercase">
+          <span className="text-xs font-semibold tracking-widest text-(--color-accent) uppercase">
             Join Us
           </span>
           <h2 className="text-4xl font-semibold">加入我们</h2>
-          <p className="text-[var(--color-text-secondary)]">
+          <p className="text-(--color-text-secondary)">
             与志同道合的伙伴一起，在技术的海洋中自由航行
           </p>
         </div>
@@ -61,17 +61,17 @@ const JoinUs = () => {
         {/* 内容区 */}
         <div className="grid md:grid-cols-3 gap-8">
           {/* 我们寻找 */}
-          <div className="bg-[var(--color-bg-card)] rounded-xl p-6 space-y-6 border border-[var(--glass-border)]">
+          <div className="bg-(--color-bg-card) rounded-xl p-6 space-y-6 border border-(--glass-border)">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-[var(--color-accent-soft)] flex items-center justify-center">
-                <Search className="text-[var(--color-accent)]" size={20} />
+              <div className="w-10 h-10 rounded-lg bg-(--color-accent-soft) flex items-center justify-center">
+                <Search className="text-(--color-accent)" size={20} />
               </div>
               <h3 className="font-semibold">我们寻找</h3>
             </div>
             <ul className="space-y-3">
               {requirements.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-[var(--color-text-secondary)]">
-                  <span className="text-[var(--color-accent)] mt-0.5">✓</span>
+                <li key={item} className="flex items-start gap-3 text-sm text-(--color-text-secondary)">
+                  <span className="text-(--color-accent) mt-0.5">✓</span>
                   <span>{item}</span>
                 </li>
               ))}
@@ -79,17 +79,17 @@ const JoinUs = () => {
           </div>
 
           {/* 我们提供 */}
-          <div className="bg-[var(--color-bg-card)] rounded-xl p-6 space-y-6 border border-[var(--glass-border)]">
+          <div className="bg-(--color-bg-card) rounded-xl p-6 space-y-6 border border-(--glass-border)">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-[var(--color-accent-soft)] flex items-center justify-center">
-                <Gift className="text-[var(--color-accent)]" size={20} />
+              <div className="w-10 h-10 rounded-lg bg-(--color-accent-soft) flex items-center justify-center">
+                <Gift className="text-(--color-accent)" size={20} />
               </div>
               <h3 className="font-semibold">我们提供</h3>
             </div>
             <ul className="space-y-3">
               {benefits.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-[var(--color-text-secondary)]">
-                  <span className="text-[var(--color-accent)] mt-0.5">★</span>
+                <li key={item} className="flex items-start gap-3 text-sm text-(--color-text-secondary)">
+                  <span className="text-(--color-accent) mt-0.5">★</span>
                   <span>{item}</span>
                 </li>
               ))}
@@ -97,26 +97,26 @@ const JoinUs = () => {
           </div>
 
           {/* 联系我们 */}
-          <div className="bg-[var(--color-bg-card)] rounded-xl p-6 space-y-6 border border-[var(--glass-border)]">
+          <div className="bg-(--color-bg-card) rounded-xl p-6 space-y-6 border border-(--glass-border)">
             <h3 className="font-semibold text-lg">准备好开始你的技术之旅了吗？</h3>
-            <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+            <p className="text-sm text-(--color-text-secondary) leading-relaxed">
               扫描二维码或联系我们，加入典创工作室大家庭
             </p>
             <div className="space-y-4">
               <div className="flex items-center gap-3 text-sm">
-                <span className="text-[var(--color-accent)]">QQ</span>
-                <span className="text-[var(--color-text-secondary)]">715940323</span>
+                <span className="text-(--color-accent)">QQ</span>
+                <span className="text-(--color-text-secondary)">715940323</span>
               </div>
               <div className="flex items-center gap-3 text-sm">
-                <Mail size={16} className="text-[var(--color-accent)]" />
-                <span className="text-[var(--color-text-secondary)]">outside@duapp.dev</span>
+                <Mail size={16} className="text-(--color-accent)" />
+                <span className="text-(--color-text-secondary)">outside@duapp.dev</span>
               </div>
             </div>
             <a
               href="https://qm.qqq.com/cgi-bin/qm/qr?k=Y9XgCa9SyryugaAEqjm1i_CtI-cHenP6&jump_from=webapi&authKey=AiaPPy7DDEmKLfMDgVD4er1hVNq4h0HciXudWTlxhVp5SZLcusQN3yc7DPzeWRrS"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[var(--color-accent)] hover:bg-[var(--color-accent-strong)] text-white font-medium transition"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-(--color-accent) hover:bg-(--color-accent-strong) text-white font-medium transition"
             >
               <Send size={18} />
               <span>立即申请</span>

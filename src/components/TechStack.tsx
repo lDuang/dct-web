@@ -74,11 +74,11 @@ const TechStack = () => {
       <div className="max-w-6xl mx-auto space-y-12">
         {/* 标题区 */}
         <div className="text-center space-y-4">
-          <span className="text-xs font-semibold tracking-widest text-[var(--color-accent)] uppercase">
+          <span className="text-xs font-semibold tracking-widest text-(--color-accent) uppercase">
             Tech Stack
           </span>
           <h2 className="text-4xl font-semibold">技术领域</h2>
-          <p className="text-[var(--color-text-secondary)]">
+          <p className="text-(--color-text-secondary)">
             全栈技术探索，从前端到后端，从算法到嵌入式
           </p>
         </div>
@@ -88,11 +88,11 @@ const TechStack = () => {
           {techCategories.map((category) => (
             <div
               key={category.title}
-              className="bg-[var(--color-bg-card)] rounded-xl p-6 space-y-5 border border-[var(--glass-border)]"
+              className="bg-(--color-bg-card) rounded-xl p-6 space-y-5 border border-(--glass-border)"
             >
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-[var(--color-accent-soft)] flex items-center justify-center">
-                  <category.icon className="text-[var(--color-accent)]" size={20} />
+                <div className="w-10 h-10 rounded-lg bg-(--color-accent-soft) flex items-center justify-center">
+                  <category.icon className="text-(--color-accent)" size={20} />
                 </div>
                 <h3 className="font-semibold">{category.title}</h3>
               </div>
@@ -100,7 +100,7 @@ const TechStack = () => {
                 {category.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-3 py-1 text-xs rounded-full bg-[var(--color-bg-surface)] text-[var(--color-text-secondary)] border border-[var(--glass-border)]"
+                    className="px-3 py-1 text-xs rounded-full bg-(--color-bg-surface) text-(--color-text-secondary) border border-(--glass-border)"
                   >
                     {tag}
                   </span>
