@@ -1,6 +1,6 @@
 /* components/Footer.tsx */
 import { useEffect, useRef, useState } from 'react'
-import { Mail, Github, Code } from 'lucide-react'
+import { Github, Code, Mail, Link as LinkIcon, Layout, Server, Database, Cloud, Cpu, Brain } from 'lucide-react'
 
 const quickLinks = [
   { label: '首页', href: '#home' },
@@ -11,12 +11,20 @@ const quickLinks = [
   { label: '加入我们', href: '#join' },
 ]
 
-const techAreas = ['前端开发', '后端开发', '嵌入式系统', '算法竞赛']
+const techAreas = [
+  { label: '前端开发', icon: Layout },
+  { label: '后端开发', icon: Server },
+  { label: '数据库', icon: Database },
+  { label: '运维/测开', icon: Cloud },
+  { label: '嵌入式系统', icon: Cpu },
+  { label: '算法竞赛', icon: Brain },
+]
 
 const friendLinks = [
-  { label: 'GitHub', href: 'https://github.com/dct-web' },
-  { label: 'Blog', href: 'https://blog.coderpath.me' },
-  { label: 'VS Code', href: 'https://code.visualstudio.com/' },
+  { label: 'dct-web-git', href: 'https://github.com/lDuang/dct-web' },
+  { label: "Xu Blog", href: 'https://blog.coderpath.me' },
+  { label: "Tjx Blog", href: 'https://blog.tangjiaxin.top' },
+  { label: 'Wy Blog', href: 'https://yezi0507.github.io' },
 ]
 
 const Footer = () => {
@@ -64,7 +72,10 @@ const Footer = () => {
               代码与梦想，自由生长。汇聚热爱编程的学子，在技术的世界里探索无限可能。
             </p>
             <div>
-              <h4 className="font-semibold mb-4">友情链接</h4>
+              <h4 className="flex items-center gap-2 font-semibold mb-4">
+                <LinkIcon size={18} className="text-(--color-accent)" />
+                友情链接
+              </h4>
               <ul className="space-y-2">
                 {friendLinks.map((link) => (
                   <li key={link.label}>
@@ -84,7 +95,10 @@ const Footer = () => {
 
           {/* 快速导航 */}
           <div>
-            <h4 className="font-semibold mb-4">快速导航</h4>
+            <h4 className="flex items-center gap-2 font-semibold mb-4">
+              <LinkIcon size={18} className="text-(--color-accent)" />
+              快速导航
+            </h4>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.label}>
@@ -102,23 +116,28 @@ const Footer = () => {
           {/* 技术领域 + 联系 */}
           <div className="space-y-6">
             <div>
-              <h4 className="font-semibold mb-4">技术领域</h4>
+              <h4 className="flex items-center gap-2 font-semibold mb-4">
+                <Code size={18} className="text-(--color-accent)" />
+                技术领域
+              </h4>
               <ul className="space-y-3">
                 {techAreas.map((area) => (
-                  <li key={area}>
+                  <li key={area.label}>
                     <span className="flex items-center gap-2 text-sm text-(--color-text-secondary)">
-                      <Code size={14} />
-                      {area}
+                      <area.icon size={14} />
+                      {area.label}
                     </span>
                   </li>
                 ))}
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold mb-4">联系我们</h4>
+              <h4 className="flex items-center gap-2 font-semibold mb-4">
+                <Mail size={18} className="text-(--color-accent)" />
+                联系我们
+              </h4>
               <div className="space-y-3 text-sm text-(--color-text-secondary)">
                 <p>QQ：715940323</p>
-                <p>outside@duapp.dev</p>
               </div>
             </div>
           </div>
@@ -138,12 +157,12 @@ const Footer = () => {
             >
               <Github size={20} />
             </a>
-            <a
+            {/* <a
               href="mailto:outside@duapp.dev"
               className="text-(--color-text-secondary) hover:text-(--color-accent) transition"
             >
               <Mail size={20} />
-            </a>
+            </a> */}
           </div>
         </div>
       </div>

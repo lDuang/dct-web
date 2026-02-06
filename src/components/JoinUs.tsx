@@ -1,6 +1,6 @@
 /* components/JoinUs.tsx */
 import { useEffect, useRef, useState } from 'react'
-import { Search, Gift, Send, Mail } from 'lucide-react'
+import { Search, Gift, Send } from 'lucide-react'
 
 const requirements = [
   '热爱编程，对技术充满好奇心',
@@ -146,15 +146,9 @@ const JoinUs = () => {
             <p className="text-sm text-(--color-text-secondary) leading-relaxed">
               扫描二维码或联系我们，加入典创工作室大家庭
             </p>
-            <div className="space-y-4">
-              <div className="flex items-center gap-3 text-sm">
-                <span className="text-(--color-accent)">QQ</span>
-                <span className="text-(--color-text-secondary)">715940323</span>
-              </div>
-              <div className="flex items-center gap-3 text-sm">
-                <Mail size={16} className="text-(--color-accent)" />
-                <span className="text-(--color-text-secondary)">outside@duapp.dev</span>
-              </div>
+            <div className="flex items-center gap-3 text-sm">
+              <span className="text-(--color-accent)">QQ</span>
+              <span className="text-(--color-text-secondary)">715940323</span>
             </div>
             <a
               href="https://qm.qqq.com/cgi-bin/qm/qr?k=Y9XgCa9SyryugaAEqjm1i_CtI-cHenP6&jump_from=webapi&authKey=AiaPPy7DDEmKLfMDgVD4er1hVNq4h0HciXudWTlxhVp5SZLcusQN3yc7DPzeWRrS"

@@ -13,32 +13,75 @@ const techCategories = [
   {
     icon: Layout,
     title: '前端开发',
-    tags: ['React', 'Vue', 'JS/TS', 'Next.js', 'Tailwind CSS'],
+    tags: [
+      { name: 'React', icon: 'react' },
+      { name: 'Vue', icon: 'vuedotjs' },
+      { name: 'Next.js', icon: 'nextdotjs' },
+      { name: 'React Native', icon: 'react' },
+      { name: 'Tauri', icon: 'tauri' },
+      { name: 'Electron', icon: 'electron' },
+      { name: 'Figma', icon: 'figma' },
+      { name: 'UI Kit', icon: 'uikit' },
+    ],
   },
   {
     icon: Server,
     title: '后端开发',
-    tags: ['Golang', 'Rust', 'Node.js', 'Java', 'Zig', 'Spring Boot'],
+    tags: [
+      { name: 'Node.js', icon: 'nodedotjs' },
+      { name: 'Java', icon: 'openjdk' },
+      { name: 'Swift', icon: 'swift' },
+      { name: 'Golang', icon: 'go' },
+      { name: 'JavaScript', icon: 'javascript' },
+      { name: 'TypeScript', icon: 'typescript' },
+      { name: 'Rust', icon: 'rust' },
+      { name: 'Zig', icon: 'zig' },
+    ],
   },
   {
     icon: Database,
     title: '数据库',
-    tags: ['PostgreSQL', 'MongoDB', 'Redis', 'SQLite', 'MySQL'],
+    tags: [
+      { name: 'PostgreSQL', icon: 'postgresql' },
+      { name: 'MongoDB', icon: 'mongodb' },
+      { name: 'Redis', icon: 'redis' },
+      { name: 'SQLite', icon: 'sqlite' },
+      { name: 'MySQL', icon: 'mysql' },
+      { name: 'Swift Data', icon: 'swift' },
+    ],
   },
   {
     icon: Cloud,
     title: '运维/测开',
-    tags: ['Docker', 'Kubernetes', 'K3s', '云原生', 'PaaS', 'SaaS'],
+    tags: [
+      { name: 'Docker', icon: 'docker' },
+      { name: 'Kubernetes', icon: 'kubernetes' },
+      { name: 'K3s', icon: 'kubernetes' },
+      { name: 'Cloud Native', icon: 'cloudflare' },
+      { name: 'Vercel', icon: 'vercel' },
+    ],
   },
   {
     icon: Cpu,
     title: '嵌入式系统',
-    tags: ['ROS', 'FreeRTOS', '树莓派', 'Arduino', 'STM32'],
+    tags: [
+      { name: 'ROS', icon: 'ros' },
+      { name: 'FreeRTOS', icon: '' },
+      { name: 'Raspberry Pi', icon: 'raspberrypi' },
+      { name: 'Arduino', icon: 'arduino' },
+      { name: 'STM32', icon: 'stmicroelectronics' },
+    ],
   },
   {
     icon: Brain,
     title: '算法竞赛',
-    tags: ['C++', '数据结构', '算法设计', 'LeetCode', '蓝桥杯'],
+    tags: [
+      { name: 'C++', icon: 'cplusplus' },
+      { name: '数据结构', icon: 'python' },
+      { name: 'LeetCode', icon: 'leetcode' },
+      { name: '洛谷', icon: 'https://fecdn.luogu.com.cn/columba/static.325908fec383795b.logo-single-color.svg' },
+      { name: '蓝桥杯', icon: 'c' },
+    ],
   },
 ]
 
@@ -88,7 +131,6 @@ const TechStack = () => {
         {/* 技术卡片 */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {techCategories.map((category, index) => {
-            const delay = index * 80
             const isHovered = hoveredCategory === category.title
             return (
               <div
@@ -133,20 +175,28 @@ const TechStack = () => {
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {category.tags.map((tag) => {
-                    const isTagHovered = hoveredTag === tag
+                    const isTagHovered = hoveredTag === tag.name
                     return (
                       <span
-                        key={tag}
-                        className="px-3 py-1.5 text-xs rounded-lg bg-(--color-bg-surface) text-(--color-text-secondary) transition-all duration-300 cursor-default"
+                        key={tag.name}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg bg-(--color-bg-surface) text-(--color-text-secondary) transition-all duration-300 cursor-default"
                         style={{
                           opacity: isTagHovered ? 1 : isHovered ? 0.9 : 0.7,
                           transform: isTagHovered ? 'translateY(-2px)' : 'translateY(0)',
                           color: isTagHovered ? 'var(--color-accent)' : 'var(--color-text-secondary)',
                         }}
-                        onMouseEnter={() => setHoveredTag(tag)}
+                        onMouseEnter={() => setHoveredTag(tag.name)}
                         onMouseLeave={() => setHoveredTag(null)}
                       >
-                        {tag}
+                        {tag.icon && (
+                          <img
+                            src={tag.icon.startsWith('http') ? tag.icon : `https://cdn.simpleicons.org/${tag.icon}?viewbox=auto`}
+                            alt={tag.name}
+                            width={14}
+                            height={14}
+                          />
+                        )}
+                        {tag.name}
                       </span>
                     )
                   })}
