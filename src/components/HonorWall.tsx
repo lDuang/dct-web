@@ -3,31 +3,31 @@ import { useEffect, useRef, useState } from 'react'
 import { useDevOnly } from '../hooks/useDevOnly'
 
 const allImageLinks = [
-  'https://cloud.duapp.dev/f/5Lfq/IMG_1365.jpeg',
-  'https://cloud.duapp.dev/f/JrhY/IMG_1368.jpeg',
-  'https://cloud.duapp.dev/f/PMUN/IMG_0736.jpeg',
-  'https://cloud.duapp.dev/f/3QCb/IMG_1367.jpeg',
-  'https://cloud.duapp.dev/f/oWBiY/IMG_1349.jpeg',
-  'https://cloud.duapp.dev/f/GgFM/IMG_1366.jpeg',
-  'https://cloud.duapp.dev/f/9GsR/IMG_1364.jpeg',
-  'https://cloud.duapp.dev/f/bvto/IMG_1363.jpeg',
-  'https://cloud.duapp.dev/f/BnSn/IMG_1362.jpeg',
-  'https://cloud.duapp.dev/f/L2HY/IMG_1361.jpeg',
-  'https://cloud.duapp.dev/f/ZWTY/IMG_1359.jpeg',
-  'https://cloud.duapp.dev/f/g5iA/IMG_1358.jpeg',
-  'https://cloud.duapp.dev/f/lGI0/IMG_1355.jpeg',
-  'https://cloud.duapp.dev/f/XOcO/IMG_1356.jpeg',
-  'https://cloud.duapp.dev/f/V0f2/IMG_1357.jpeg',
-  'https://cloud.duapp.dev/f/N6h9/IMG_1354.jpeg',
-  'https://cloud.duapp.dev/f/8XUg/IMG_1353.jpeg',
-  'https://cloud.duapp.dev/f/WYFk/IMG_1352.jpeg',
-  'https://cloud.duapp.dev/f/DRsP/IMG_1304.jpeg',
-  'https://cloud.duapp.dev/f/nvXHY/IMG_1350.jpeg',
-  'https://cloud.duapp.dev/f/azlTy/IMG_1360.jpeg',
-  'https://cloud.duapp.dev/f/YlYIM/IMG_1351.jpeg',
+  '/honor/honor_0.jpg',
+  '/honor/honor_1.jpg',
+  '/honor/honor_2.jpg',
+  '/honor/honor_3.jpg',
+  '/honor/honor_4.jpg',
+  '/honor/honor_5.jpg',
+  '/honor/honor_6.jpg',
+  '/honor/honor_7.jpg',
+  '/honor/honor_8.jpg',
+  '/honor/honor_9.jpg',
+  '/honor/honor_10.jpg',
+  '/honor/honor_11.jpg',
+  '/honor/honor_12.jpg',
+  '/honor/honor_13.jpg',
+  '/honor/honor_14.jpg',
+  '/honor/honor_15.jpg',
+  '/honor/honor_16.jpg',
+  '/honor/honor_17.jpg',
+  '/honor/honor_18.jpg',
+  '/honor/honor_19.jpg',
+  '/honor/honor_20.jpg',
+  '/honor/honor_21.jpg',
 ]
 
-const devOnlyImage = 'https://cloud.duapp.dev/f/5Lfq/IMG_1365.jpeg'
+const devOnlyImage = '/honor/honor_0.jpg'
 
 type ImageItem = { id: number; src: string; x: number; y: number }
 
