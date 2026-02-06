@@ -7,82 +7,122 @@ import {
   Cloud,
   Cpu,
   Brain,
+  HardDrive,
+  Proportions,
+  SquareTerminal,
 } from 'lucide-react'
 
+// 技术图标统一前缀
+const TECH_ICON_PREFIX = '/tech-icons/'
+
+// 定义技术分类数组
 const techCategories = [
   {
     icon: Layout,
     title: '前端开发',
     tags: [
-      { name: 'React', icon: 'react' },
-      { name: 'Vue', icon: 'vuedotjs' },
-      { name: 'Next.js', icon: 'nextdotjs' },
-      { name: 'React Native', icon: 'react' },
-      { name: 'Tauri', icon: 'tauri' },
-      { name: 'Electron', icon: 'electron' },
-      { name: 'Figma', icon: 'figma' },
-      { name: 'UI Kit', icon: 'uikit' },
+      { name: 'React', icon: 'react.svg' },
+      { name: 'Vue', icon: 'vuedotjs.svg' },
+      { name: 'Next.js', icon: 'nextdotjs.svg' },
+      { name: 'React Native', icon: 'react.svg' },
+      { name: 'Tauri', icon: 'tauri.svg' },
+      { name: 'Electron', icon: 'electron.svg' },
+      { name: 'Figma', icon: 'figma.svg' },
+      { name: 'UI Kit', icon: 'uikit.svg' },
     ],
   },
   {
     icon: Server,
     title: '后端开发',
     tags: [
-      { name: 'Node.js', icon: 'nodedotjs' },
-      { name: 'Java', icon: 'openjdk' },
-      { name: 'Swift', icon: 'swift' },
-      { name: 'Golang', icon: 'go' },
-      { name: 'JavaScript', icon: 'javascript' },
-      { name: 'TypeScript', icon: 'typescript' },
-      { name: 'Rust', icon: 'rust' },
-      { name: 'Zig', icon: 'zig' },
+      { name: 'Node.js', icon: 'nodedotjs.svg' },
+      { name: 'Java', icon: 'openjdk.svg' },
+      { name: 'Swift', icon: 'swift.svg' },
+      { name: 'Golang', icon: 'go.svg' },
+      { name: 'JavaScript', icon: 'javascript.svg' },
+      { name: 'TypeScript', icon: 'typescript.svg' },
+      { name: 'Rust', icon: 'rust.svg' },
+      { name: 'Zig', icon: 'zig.svg' },
     ],
   },
   {
     icon: Database,
     title: '数据库',
     tags: [
-      { name: 'PostgreSQL', icon: 'postgresql' },
-      { name: 'MongoDB', icon: 'mongodb' },
-      { name: 'Redis', icon: 'redis' },
-      { name: 'SQLite', icon: 'sqlite' },
-      { name: 'MySQL', icon: 'mysql' },
-      { name: 'Swift Data', icon: 'swift' },
+      { name: 'PostgreSQL', icon: 'postgresql.svg' },
+      { name: 'MongoDB', icon: 'mongodb.svg' },
+      { name: 'Redis', icon: 'redis.svg' },
+      { name: 'SQLite', icon: 'sqlite.svg' },
+      { name: 'MySQL', icon: 'mysql.svg' },
+      { name: 'Swift Data', icon: 'swift.svg' },
     ],
   },
   {
     icon: Cloud,
     title: '运维/测开',
     tags: [
-      { name: 'Docker', icon: 'docker' },
-      { name: 'Kubernetes', icon: 'kubernetes' },
-      { name: 'K3s', icon: 'kubernetes' },
-      { name: 'Cloud Native', icon: 'cloudflare' },
-      { name: 'Vercel', icon: 'vercel' },
+      { name: 'Docker', icon: 'docker.svg' },
+      { name: 'Kubernetes', icon: 'kubernetes.svg' },
+      { name: 'K3s', icon: 'kubernetes.svg' },
+      { name: 'Cloud Native', icon: 'cloudflare.svg' },
+      { name: 'Vercel', icon: 'vercel.svg' },
     ],
   },
   {
     icon: Cpu,
     title: '嵌入式系统',
     tags: [
-      { name: 'ROS', icon: 'ros' },
+      { name: 'ROS', icon: 'ros.svg' },
       { name: 'FreeRTOS', icon: '' },
-      { name: 'Raspberry Pi', icon: 'raspberrypi' },
-      { name: 'Arduino', icon: 'arduino' },
-      { name: 'STM32', icon: 'stmicroelectronics' },
+      { name: 'Raspberry Pi', icon: 'raspberrypi.svg' },
+      { name: 'Arduino', icon: 'arduino.svg' },
+      { name: 'STM32', icon: '' },
     ],
   },
   {
     icon: Brain,
     title: '算法竞赛',
     tags: [
-      { name: 'C++', icon: 'cplusplus' },
-      { name: '数据结构', icon: 'python' },
-      { name: 'LeetCode', icon: 'leetcode' },
+      { name: 'C++', icon: 'cplusplus.svg' },
+      { name: '数据结构', icon: 'python.svg' },
+      { name: 'LeetCode', icon: 'leetcode.svg' },
       { name: '洛谷', icon: 'https://fecdn.luogu.com.cn/columba/static.325908fec383795b.logo-single-color.svg' },
-      { name: '蓝桥杯', icon: 'c' },
+      { name: '蓝桥杯', icon: 'c.svg' },
     ],
   },
+  {
+    icon: SquareTerminal,
+    title: '编译器设计',
+    tags: [
+      { name: 'LLVM', icon: 'llvm.svg' },
+      { name: 'Haskell', icon: 'haskell.svg' },
+      { name: 'OCaml', icon: 'ocaml.svg' },
+      { name: 'LoongArch', icon: 'loongarch.svg' }
+    ]
+  },
+  {
+    icon: HardDrive,
+    title: '操作系统',
+    tags: [
+      { name: 'Linux', icon: 'linux.svg' },
+      { name: 'FreeBSD', icon: 'freebsd.svg' },
+      { name: 'OpenBSD', icon: 'openbsd.svg' },
+      { name: 'NetBSD', icon: 'netbsd.svg' },
+      { name: 'DragonFly BSD', icon: 'dragonflybsd.svg' },
+      { name: 'RTOS', icon: '' },
+      { name: 'Redox', icon: 'redox.svg' }
+    ]
+  },
+  {
+    icon: Proportions,
+    title: 'GPU开发',
+    tags: [
+      { name: 'OpenGL', icon: 'opengl.svg' },
+      { name: 'Vulkan', icon: 'vulkan.svg' },
+      { name: 'WebGPU', icon: 'webgpu.svg' },
+      { name: 'CUDA', icon: 'cuda.svg' }
+    ]
+  }
 ]
 
 const TechStack = () => {
@@ -190,7 +230,7 @@ const TechStack = () => {
                       >
                         {tag.icon && (
                           <img
-                            src={tag.icon.startsWith('http') ? tag.icon : `https://cdn.simpleicons.org/${tag.icon}?viewbox=auto`}
+                            src={tag.icon.startsWith('http') ? tag.icon : `${TECH_ICON_PREFIX}${tag.icon}`}
                             alt={tag.name}
                             width={14}
                             height={14}
