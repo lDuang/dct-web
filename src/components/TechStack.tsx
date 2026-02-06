@@ -45,6 +45,8 @@ const techCategories = [
 const TechStack = () => {
   const sectionRef = useRef<HTMLElement>(null)
   const [isVisible, setIsVisible] = useState(false)
+  const [hoveredCategory, setHoveredCategory] = useState<string | null>(null)
+  const [hoveredTag, setHoveredTag] = useState<string | null>(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -85,29 +87,73 @@ const TechStack = () => {
 
         {/* 技术卡片 */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {techCategories.map((category) => (
-            <div
-              key={category.title}
-              className="bg-(--color-bg-card) rounded-xl p-6 space-y-5 border border-(--glass-border)"
-            >
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-(--color-accent-soft) flex items-center justify-center">
-                  <category.icon className="text-(--color-accent)" size={20} />
-                </div>
-                <h3 className="font-semibold">{category.title}</h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {category.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-3 py-1 text-xs rounded-full bg-(--color-bg-surface) text-(--color-text-secondary) border border-(--glass-border)"
+          {techCategories.map((category, index) => {
+            const delay = index * 80
+            const isHovered = hoveredCategory === category.title
+            return (
+              <div
+                key={category.title}
+                className="group bg-(--color-bg-card) rounded-2xl p-6 space-y-5 transition-all duration-500"
+                style={{
+                  opacity: isVisible ? 1 : 0,
+                  transform: isVisible
+                    ? `translateY(0)`
+                    : `translateY(${20 + index * 8}px)`,
+                  boxShadow: isHovered
+                    ? '0 8px 32px -8px var(--color-accent-20)'
+                    : 'none',
+                }}
+                onMouseEnter={() => setHoveredCategory(category.title)}
+                onMouseLeave={() => setHoveredCategory(null)}
+              >
+                <div className="flex items-center gap-3">
+                  <div
+                    className="w-10 h-10 rounded-xl bg-(--color-accent-soft) flex items-center justify-center transition-all duration-300"
+                    style={{
+                      transform: isHovered ? 'scale(1.1) rotate(5deg)' : 'scale(1)',
+                      boxShadow: isHovered
+                        ? '0 4px 16px var(--color-accent-15)'
+                        : 'none',
+                    }}
                   >
-                    {tag}
-                  </span>
-                ))}
+                    <category.icon
+                      className="text-(--color-accent) transition-transform duration-300"
+                      size={20}
+                      style={{
+                        transform: isHovered ? 'scale(1.1)' : 'scale(1)',
+                      }}
+                    />
+                  </div>
+                  <h3
+                    className="font-semibold transition-colors duration-300"
+                    style={{ color: isHovered ? 'var(--color-accent)' : 'inherit' }}
+                  >
+                    {category.title}
+                  </h3>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {category.tags.map((tag) => {
+                    const isTagHovered = hoveredTag === tag
+                    return (
+                      <span
+                        key={tag}
+                        className="px-3 py-1.5 text-xs rounded-lg bg-(--color-bg-surface) text-(--color-text-secondary) transition-all duration-300 cursor-default"
+                        style={{
+                          opacity: isTagHovered ? 1 : isHovered ? 0.9 : 0.7,
+                          transform: isTagHovered ? 'translateY(-2px)' : 'translateY(0)',
+                          color: isTagHovered ? 'var(--color-accent)' : 'var(--color-text-secondary)',
+                        }}
+                        onMouseEnter={() => setHoveredTag(tag)}
+                        onMouseLeave={() => setHoveredTag(null)}
+                      >
+                        {tag}
+                      </span>
+                    )
+                  })}
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>

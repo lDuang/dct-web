@@ -20,6 +20,7 @@ const benefits = [
 const JoinUs = () => {
   const sectionRef = useRef<HTMLElement>(null)
   const [isVisible, setIsVisible] = useState(false)
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -61,12 +62,29 @@ const JoinUs = () => {
         {/* 内容区 */}
         <div className="grid md:grid-cols-3 gap-8">
           {/* 我们寻找 */}
-          <div className="bg-(--color-bg-card) rounded-xl p-6 space-y-6 border border-(--glass-border)">
+          <div
+            className="bg-(--color-bg-card) rounded-2xl p-6 space-y-6 transition-all duration-400"
+            style={{
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+              boxShadow: hoveredCard === 'search' ? '0 8px 24px -8px var(--color-accent-20)' : 'none',
+            }}
+            onMouseEnter={() => setHoveredCard('search')}
+            onMouseLeave={() => setHoveredCard(null)}
+          >
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-(--color-accent-soft) flex items-center justify-center">
+              <div
+                className="w-10 h-10 rounded-xl bg-(--color-accent-soft) flex items-center justify-center transition-transform duration-300"
+                style={{ transform: hoveredCard === 'search' ? 'scale(1.05)' : 'scale(1)' }}
+              >
                 <Search className="text-(--color-accent)" size={20} />
               </div>
-              <h3 className="font-semibold">我们寻找</h3>
+              <h3
+                className="font-semibold transition-colors duration-300"
+                style={{ color: hoveredCard === 'search' ? 'var(--color-accent)' : 'inherit' }}
+              >
+                我们寻找
+              </h3>
             </div>
             <ul className="space-y-3">
               {requirements.map((item) => (
@@ -79,12 +97,29 @@ const JoinUs = () => {
           </div>
 
           {/* 我们提供 */}
-          <div className="bg-(--color-bg-card) rounded-xl p-6 space-y-6 border border-(--glass-border)">
+          <div
+            className="bg-(--color-bg-card) rounded-2xl p-6 space-y-6 transition-all duration-400"
+            style={{
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? 'translateY(0)' : 'translateY(28px)',
+              boxShadow: hoveredCard === 'benefits' ? '0 8px 24px -8px var(--color-accent-20)' : 'none',
+            }}
+            onMouseEnter={() => setHoveredCard('benefits')}
+            onMouseLeave={() => setHoveredCard(null)}
+          >
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-(--color-accent-soft) flex items-center justify-center">
+              <div
+                className="w-10 h-10 rounded-xl bg-(--color-accent-soft) flex items-center justify-center transition-transform duration-300"
+                style={{ transform: hoveredCard === 'benefits' ? 'scale(1.05)' : 'scale(1)' }}
+              >
                 <Gift className="text-(--color-accent)" size={20} />
               </div>
-              <h3 className="font-semibold">我们提供</h3>
+              <h3
+                className="font-semibold transition-colors duration-300"
+                style={{ color: hoveredCard === 'benefits' ? 'var(--color-accent)' : 'inherit' }}
+              >
+                我们提供
+              </h3>
             </div>
             <ul className="space-y-3">
               {benefits.map((item) => (
@@ -97,7 +132,16 @@ const JoinUs = () => {
           </div>
 
           {/* 联系我们 */}
-          <div className="bg-(--color-bg-card) rounded-xl p-6 space-y-6 border border-(--glass-border)">
+          <div
+            className="bg-(--color-bg-card) rounded-2xl p-6 space-y-6 transition-all duration-400"
+            style={{
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? 'translateY(0)' : 'translateY(36px)',
+              boxShadow: hoveredCard === 'contact' ? '0 8px 24px -8px var(--color-accent-20)' : 'none',
+            }}
+            onMouseEnter={() => setHoveredCard('contact')}
+            onMouseLeave={() => setHoveredCard(null)}
+          >
             <h3 className="font-semibold text-lg">准备好开始你的技术之旅了吗？</h3>
             <p className="text-sm text-(--color-text-secondary) leading-relaxed">
               扫描二维码或联系我们，加入典创工作室大家庭
@@ -116,7 +160,7 @@ const JoinUs = () => {
               href="https://qm.qqq.com/cgi-bin/qm/qr?k=Y9XgCa9SyryugaAEqjm1i_CtI-cHenP6&jump_from=webapi&authKey=AiaPPy7DDEmKLfMDgVD4er1hVNq4h0HciXudWTlxhVp5SZLcusQN3yc7DPzeWRrS"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-(--color-accent) hover:bg-(--color-accent-strong) text-white font-medium transition"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-(--color-accent) hover:bg-(--color-accent-strong) text-white font-medium transition hover:scale-105 active:scale-95"
             >
               <Send size={18} />
               <span>立即申请</span>

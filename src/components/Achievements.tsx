@@ -44,6 +44,7 @@ const achievements = [
 const Achievements = () => {
   const sectionRef = useRef<HTMLElement>(null)
   const [isVisible, setIsVisible] = useState(false)
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -84,23 +85,43 @@ const Achievements = () => {
 
         {/* 成就卡片 */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {achievements.map((item) => (
-            <div
-              key={item.title}
-              className="bg-(--color-bg-card) rounded-xl p-6
-                space-y-4 border border-(--glass-border)
-                hover:border-(--color-accent) transition-all duration-300"
-            >
-              <div className="w-12 h-12 rounded-lg bg-(--color-accent-soft) flex items-center justify-center">
-                <item.icon className="text-(--color-accent)" size={24} />
+          {achievements.map((item, index) => {
+            const isHovered = hoveredItem === item.title
+            return (
+              <div
+                key={item.title}
+                className="bg-(--color-bg-card) rounded-2xl p-6 space-y-4 transition-all duration-400"
+                style={{
+                  opacity: isVisible ? 1 : 0,
+                  transform: isVisible ? 'translateY(0)' : `translateY(${20 + index * 6}px)`,
+                  boxShadow: isHovered ? '0 8px 24px -8px var(--color-accent-20)' : 'none',
+                }}
+                onMouseEnter={() => setHoveredItem(item.title)}
+                onMouseLeave={() => setHoveredItem(null)}
+              >
+                <div
+                  className="w-12 h-12 rounded-xl bg-(--color-accent-soft) flex items-center justify-center transition-all duration-300"
+                  style={{ transform: isHovered ? 'scale(1.05)' : 'scale(1)' }}
+                >
+                  <item.icon
+                    className="text-(--color-accent) transition-transform duration-300"
+                    size={24}
+                    style={{ transform: isHovered ? 'scale(1.1)' : 'scale(1)' }}
+                  />
+                </div>
+                <h3
+                  className="font-semibold text-lg leading-tight transition-colors duration-300"
+                  style={{ color: isHovered ? 'var(--color-accent)' : 'inherit' }}
+                >
+                  {item.title}
+                </h3>
+                <p className="text-sm text-(--color-accent) font-medium">{item.result}</p>
+                <p className="text-sm text-(--color-text-secondary) leading-relaxed">
+                  {item.desc}
+                </p>
               </div>
-              <h3 className="font-semibold text-lg leading-tight">{item.title}</h3>
-              <p className="text-sm text-(--color-accent) font-medium">{item.result}</p>
-              <p className="text-sm text-(--color-text-secondary) leading-relaxed">
-                {item.desc}
-              </p>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>
