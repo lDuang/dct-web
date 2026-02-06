@@ -3,31 +3,31 @@ import { useEffect, useRef, useState } from 'react'
 import { useDevOnly } from '../hooks/useDevOnly'
 
 const allImageLinks = [
-  '/honor/honor_0.jpg',
-  '/honor/honor_1.jpg',
-  '/honor/honor_2.jpg',
-  '/honor/honor_3.jpg',
-  '/honor/honor_4.jpg',
-  '/honor/honor_5.jpg',
-  '/honor/honor_6.jpg',
-  '/honor/honor_7.jpg',
-  '/honor/honor_8.jpg',
-  '/honor/honor_9.jpg',
-  '/honor/honor_10.jpg',
-  '/honor/honor_11.jpg',
-  '/honor/honor_12.jpg',
-  '/honor/honor_13.jpg',
-  '/honor/honor_14.jpg',
-  '/honor/honor_15.jpg',
-  '/honor/honor_16.jpg',
-  '/honor/honor_17.jpg',
-  '/honor/honor_18.jpg',
-  '/honor/honor_19.jpg',
-  '/honor/honor_20.jpg',
-  '/honor/honor_21.jpg',
+  '/honor/honor_0.webp',
+  '/honor/honor_1.webp',
+  '/honor/honor_2.webp',
+  '/honor/honor_3.webp',
+  '/honor/honor_4.webp',
+  '/honor/honor_5.webp',
+  '/honor/honor_6.webp',
+  '/honor/honor_7.webp',
+  '/honor/honor_8.webp',
+  '/honor/honor_9.webp',
+  '/honor/honor_10.webp',
+  '/honor/honor_11.webp',
+  '/honor/honor_12.webp',
+  '/honor/honor_13.webp',
+  '/honor/honor_14.webp',
+  '/honor/honor_15.webp',
+  '/honor/honor_16.webp',
+  '/honor/honor_17.webp',
+  '/honor/honor_18.webp',
+  '/honor/honor_19.webp',
+  '/honor/honor_20.webp',
+  '/honor/honor_21.webp',
 ]
 
-const devOnlyImage = '/honor/honor_0.jpg'
+const devOnlyImage = '/honor/honor_0.webp'
 
 type ImageItem = { id: number; src: string; x: number; y: number }
 

@@ -4,8 +4,8 @@
 from PIL import Image
 import os
 
-# 目标大小：500KB
-TARGET_SIZE = 500 * 1024  # bytes
+# 目标大小：100KB
+TARGET_SIZE = 100 * 1024  # bytes
 INPUT_DIR = "public/honor"
 
 def compress_image(filepath: str, target_size: int = TARGET_SIZE) -> bool:
@@ -25,8 +25,9 @@ def compress_image(filepath: str, target_size: int = TARGET_SIZE) -> bool:
         img = img.convert('RGB')
 
     # 二分法找合适的质量参数
-    min_quality, max_quality = 1, 100
+    min_quality, max_quality = 1, 95
     best_quality = max_quality
+    best_size = original_size
 
     while min_quality <= max_quality:
         quality = (min_quality + max_quality) // 2
@@ -35,13 +36,33 @@ def compress_image(filepath: str, target_size: int = TARGET_SIZE) -> bool:
         img.save(temp_path, 'JPEG', quality=quality, optimize=True)
         new_size = os.path.getsize(temp_path)
 
-        if new_size <= target_size:
+        if new_size <= target_size and new_size < best_size:
             best_quality = quality
+            best_size = new_size
             min_quality = quality + 1
         else:
             max_quality = quality - 1
 
         os.remove(temp_path)
+
+    # 如果最佳质量仍然导致文件变大，使用更激进的方法
+    if best_size >= original_size:
+        # 降低分辨率
+        width, height = img.size
+        scale = 0.8
+        while scale >= 0.5:
+            new_size = int(width * scale), int(height * scale)
+            resized = img.resize(new_size, Image.LANCZOS)
+            temp_path = filepath + '.tmp'
+            resized.save(temp_path, 'JPEG', quality=75, optimize=True)
+            file_size = os.path.getsize(temp_path)
+            os.remove(temp_path)
+
+            if file_size <= target_size:
+                resized.save(filepath, 'JPEG', quality=75, optimize=True)
+                print(f"✓ {os.path.basename(filepath)}: {original_size // 1024}KB → {file_size // 1024}KB (缩放: {scale:.0%})")
+                return True
+            scale -= 0.1
 
     # 用最佳质量保存
     img.save(filepath, 'JPEG', quality=best_quality, optimize=True)

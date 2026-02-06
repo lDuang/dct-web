@@ -97,7 +97,7 @@ const techCategories = [
       { name: 'LLVM', icon: 'llvm.svg' },
       { name: 'Haskell', icon: 'haskell.svg' },
       { name: 'OCaml', icon: 'ocaml.svg' },
-      { name: 'LoongArch', icon: 'loongarch.svg' }
+      { name: 'LoongArch', icon: '' }
     ]
   },
   {
