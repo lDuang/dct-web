@@ -1,7 +1,8 @@
 /* components/HonorWall.tsx */
 import { useEffect, useRef, useState } from 'react'
+import { useDevOnly } from '../hooks/useDevOnly'
 
-const imageLinks = [
+const allImageLinks = [
   'https://cloud.duapp.dev/f/5Lfq/IMG_1365.jpeg',
   'https://cloud.duapp.dev/f/JrhY/IMG_1368.jpeg',
   'https://cloud.duapp.dev/f/PMUN/IMG_0736.jpeg',
@@ -26,9 +27,15 @@ const imageLinks = [
   'https://cloud.duapp.dev/f/YlYIM/IMG_1351.jpeg',
 ]
 
+const devOnlyImage = 'https://cloud.duapp.dev/f/5Lfq/IMG_1365.jpeg'
+
 type ImageItem = { id: number; src: string; x: number; y: number }
 
 const HonorWall = () => {
+  const imageLinks = useDevOnly({
+    allItems: allImageLinks,
+    devOnly: devOnlyImage,
+  })
   const containerRef = useRef<HTMLDivElement>(null)
   const gridRef = useRef<HTMLDivElement>(null)
   const animationId = useRef<number | null>(null)
