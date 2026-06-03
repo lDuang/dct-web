@@ -164,9 +164,11 @@ const HonorWall = () => {
             >
               <img
                 src={item.src}
-                alt=""
+                alt={`典创工作室荣誉墙展示图片 ${index + 1}`}
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                 style={{ opacity: hoveredIndex === index ? 1 : 0.85 }}
+                loading="lazy"
+                decoding="async"
               />
             </div>
           ))}

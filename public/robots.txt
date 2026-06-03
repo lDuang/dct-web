@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://dct.coderpath.dev/sitemap.xml

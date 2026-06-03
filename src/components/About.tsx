@@ -47,6 +47,7 @@ const About = () => {
     <section
       ref={sectionRef}
       id="about"
+      aria-labelledby="about-title"
       className="py-24 px-6 opacity-0 translate-y-8 transition-all duration-700 ease-out"
       style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? 'translateY(0)' : 'translateY(32px)' }}
     >
@@ -56,7 +57,7 @@ const About = () => {
           <span className="text-xs font-semibold tracking-widest text-(--color-accent) uppercase">
             About Us
           </span>
-          <h2 className="text-4xl font-semibold">关于我们</h2>
+          <h2 id="about-title" className="text-4xl font-semibold">关于我们</h2>
           <p className="text-(--color-text-secondary)">专业的技术团队，用心培养每一位成员</p>
         </div>
 
@@ -80,8 +81,10 @@ const About = () => {
             <div className="relative rounded-2xl overflow-hidden border border-(--glass-border)">
               <img
                 src="https://cloud.duapp.dev/f/qaHY/GFGYhuQb_EXDobluD.png"
-                alt="Team"
+                alt="典创工作室团队活动合影"
                 className="w-full h-auto"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>

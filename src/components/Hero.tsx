@@ -16,7 +16,7 @@ const Hero = () => {
   }, [])
 
   return (
-    <section className="min-h-screen flex items-center justify-center px-6">
+    <section id="home" className="min-h-screen flex items-center justify-center px-6">
       <div className="max-w-4xl w-full text-center space-y-10">
         <div>
           <h1 className="text-5xl md:text-7xl font-semibold tracking-tight">
